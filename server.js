@@ -3,7 +3,6 @@ const url = require('url');
 const text = require('./lang.json');
 
 let lang = "esp";
-const setLang = (l) => { if (l === "esp" || l === "eng") { lang = lg } };
 
 const versionsList = require('./modules/VersionsList');
 const getAbsUrl = require('./modules/GetAbsUrl');
@@ -16,9 +15,12 @@ const server = (LANG,PORT) => {
 
 const versions = ["v1"];
 
+const setLang = (l) => { if (l === "esp" || l === "eng") { lang = l } };
+const getUrlQueries = (req) => { return url.parse(req.url,true).query };
+const queryLang = (r) => setLang(getUrlQueries(r).lang);
+
 app.get('/', (req,res) => {
-    let queries = url.parse(req.url,true).query;
-    setLang(queries.lang);
+    queryLang(req);
 
     res.status(200);
     res.json(versionsList(versions,getAbsUrl(req,res),text.routes.versions[lang]));
