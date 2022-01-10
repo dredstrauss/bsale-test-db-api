@@ -10,5 +10,35 @@
             "esp": "versiones",
             "eng": "versions"
         }
+    },
+    "db": {
+        "error": {
+            "esp": "Error en la base de datos",
+            "eng": "Database error"
+        },
+        "category": {
+            "esp": "categoría",
+            "eng": "category"
+        },
+        "name": {
+            "esp": "nombre",
+            "eng": "name"
+        },
+        "price": {
+            "esp": "precio",
+            "eng": "price"
+        },
+        "off": {
+            "esp": "descuento",
+            "eng": "discount"
+        },
+        "img": {
+            "esp": "imagen",
+            "eng": "image"
+        },
+        "id": {
+            "esp": "id",
+            "eng": "id"
+        }
     }
 }
