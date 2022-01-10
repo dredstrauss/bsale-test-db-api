@@ -1,0 +1,8 @@
+{
+    "server": {
+        "listening": {
+            "esp": "Servidor escuchando en el puerto",
+            "eng": "Server listening on port"
+        }
+    }
+}
