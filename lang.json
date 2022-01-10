@@ -16,6 +16,14 @@
             "esp": "Error en la base de datos",
             "eng": "Database error"
         },
+        "noRes": {
+            "esp": "No se encontraron resultados",
+            "eng": "No results found"
+        },
+        "all": {
+            "esp": "todo",
+            "eng": "all"
+        },
         "category": {
             "esp": "categoría",
             "eng": "category"

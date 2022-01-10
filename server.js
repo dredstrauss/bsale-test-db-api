@@ -17,7 +17,6 @@ let connection;
 const server = (LANG,PORT) => {
     lang = LANG;
     app.listen(PORT, () => console.log(`${text.server.listening[lang]}: ${PORT}`));
-    connection = mysql.createConnection(dbConfig);
 };
 
 const versions = ["v1"];
@@ -35,16 +34,48 @@ app.get('/', (req,res) => {
 
 // API v1
 
-app.get('/v1/all', async(req,res) => {
+app.get('/v1', (req,res) => {
     queryLang(req);
+    let list = {};
+    list[text.db.all[lang]] = getAbsUrl(req) + 'all';
 
-    connection.query(sqlQueries.all, (error, results, fields) => {
+    connection = mysql.createConnection(dbConfig);
+    connection.query(sqlQueries.categories, (error,results) => {
         if (error) {
             res.status(500);
             res.json({ "error": text.db.error[lang] })
-        };
+        } else {
+            for (key in results) {
+                const name = results[key].name.replace(/\s/g, '%20');
+                list[results[key].name] = getAbsUrl(req) + name;
+            }
+            res.status(200);
+            res.json(list);
+        }
+        connection.end();
+    })
 
-        res.json(results)
+});
+
+app.get('/v1/:cat', (req,res) => {
+    queryLang(req);
+    let sqlQuery = sqlQueries.all;
+    const urlQueries = url.parse(req.url,true).query;
+
+    if (req.params.cat !== 'all') { sqlQuery = sqlQueries.category(req.params.cat) };
+
+    connection = mysql.createConnection(dbConfig);
+    connection.query(sqlQuery, (error, results) => {
+        if (error) {
+            res.status(500);
+            res.json({ "error": text.db.error[lang] })
+        } else if (Object.keys(results).length === 0) {
+            res.status(400)
+            res.json( { "error": text.db.noRes[lang] } );
+        } else {
+            res.status(200)
+            res.json(results)
+        }
 
         connection.end();
     });
