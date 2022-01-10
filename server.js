@@ -7,6 +7,7 @@ let lang = "esp";
 
 const versionsList = require('./modules/VersionsList');
 const getAbsUrl = require('./modules/GetAbsUrl');
+const sqlQueries = require('./modules/SQLQueries');
 
 const app = express();
 
@@ -37,11 +38,14 @@ app.get('/', (req,res) => {
 app.get('/v1/all', async(req,res) => {
     queryLang(req);
 
-    const SQLQuery = `SELECT category.name AS category, p.id AS id, p.name AS name, p.url_image AS img, p.price AS price, p.discount AS off FROM product AS p JOIN category ON p.category = category.id;`;
-    
-    connection.query(SQLQuery, (error, results, fields) => {
-        if (error) throw error;
+    connection.query(sqlQueries.all, (error, results, fields) => {
+        if (error) {
+            res.status(500);
+            res.json({ "error": text.db.error[lang] })
+        };
+
         res.json(results)
+
         connection.end();
     });
 
