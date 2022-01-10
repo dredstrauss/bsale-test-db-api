@@ -4,5 +4,11 @@
             "esp": "Servidor escuchando en el puerto",
             "eng": "Server listening on port"
         }
+    },
+    "routes": {
+        "versions": {
+            "esp": "versiones",
+            "eng": "versions"
+        }
     }
 }
