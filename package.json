@@ -1,0 +1,30 @@
+{
+  "name": "bsale-test-db-api",
+  "version": "1.0.0",
+  "description": "API RESTful de acceso a bbdd de pruebas de BSale (MySQL)",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dredstrauss/bsale-test-db-api.git"
+  },
+  "keywords": [
+    "api",
+    "mysql",
+    "bsale",
+    "test",
+    "node"
+  ],
+  "author": "Pedro Stein",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/dredstrauss/bsale-test-db-api/issues"
+  },
+  "homepage": "https://github.com/dredstrauss/bsale-test-db-api#readme",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "mysql": "^2.18.1"
+  }
+}
