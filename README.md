@@ -8,13 +8,17 @@ Link base de la API: https://psg-bsale-test.herokuapp.com/
 
 Ruta | Parámetros | Contenidos
 ------|------------|------------
-/ | lang | Lista versiones de la base de datos con sus url en el lenguaje seleccionado.
+/ |  | Lista versiones de la base de datos con sus URL.
+/v[número de versión] |  | Lista de categorías con sus URL.
+/v[versión]/[categoría] |  | Lista de productos de la categoría.
 
-Ejemplo: https://psg-bsale-test.herokuapp.com/?lang=esp*
+Parámetros comunes | Contenidos
+-------------------|------------
+lang               | Idioma de los mensajes y atributos del objeto de salida ("eng" o "esp").
 
-> (*): lenguajes disponibles: [eng]lish, [esp]añol.
+Ejemplo: https://psg-bsale-test.herokuapp.com/v1/snack?lang=esp
 
 ### Características
 
 - Deploy en Heroku
-- Base
+- Base de datos MySQL con datos de acceso por variable de entorno
