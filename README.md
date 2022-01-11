@@ -2,7 +2,7 @@
 
 Acceso a base de datos MySQL de pruebas de BSale para consultar listas de productos tipo e-commerce. API construida en Node JS, usando Express JS.
 
-Link base de la API: https://psg-bsale-test.herokuapp.com/
+Link base de la API: https://bsale-test-api-psg.herokuapp.com
 
 ## Endpoints
 
@@ -16,7 +16,7 @@ Parámetros comunes | Contenidos
 -------------------|------------
 lang               | Idioma de los mensajes y atributos del objeto de salida ("eng" o "esp").
 
-Ejemplo: https://psg-bsale-test.herokuapp.com/v1/snack?lang=esp
+Ejemplo: https://bsale-test-api-psg.herokuapp.com/v1/snack?lang=esp
 
 ### Características
 
