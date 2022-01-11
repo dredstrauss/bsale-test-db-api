@@ -1,4 +1,5 @@
 const express = require('express');
+const cors = require('cors');
 const mysql = require('mysql');
 const url = require('url');
 const text = require('./lang.json');
@@ -13,6 +14,13 @@ const app = express();
 
 const dbConfig = process.env.DATABASE_URI;
 let connection;
+
+app.use(cors());
+app.use((req,res,next) => {
+    res.header('Access-Control-Allow-Origin','*');
+    res.header('Access-Control-Allow-Headers','Origin, X-Requested-With, Content-Type, accept');
+    next();
+});
 
 const server = (LANG,PORT) => {
     lang = LANG;
@@ -60,8 +68,10 @@ app.get('/v1', (req,res) => {
 app.get('/v1/:cat', (req,res) => {
     queryLang(req);
     let sqlQuery = sqlQueries.all;
+    let pag = 0;
     const urlQueries = url.parse(req.url,true).query;
 
+    if (urlQueries.pag && typeof(urlQueries.pag) === int) {pag = urlQueries.pag};
     if (req.params.cat !== 'all') { sqlQuery = sqlQueries.category(req.params.cat) };
 
     connection = mysql.createConnection(dbConfig);
@@ -73,10 +83,11 @@ app.get('/v1/:cat', (req,res) => {
             res.status(400)
             res.json( { "error": text.db.noRes[lang] } );
         } else {
+            // TODO: usar paginación aquí
+
             res.status(200)
             res.json(results)
         }
-
         connection.end();
     });
 
